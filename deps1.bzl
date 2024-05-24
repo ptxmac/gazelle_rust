@@ -1,14 +1,14 @@
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load("@bazel_tools//tools/build_defs/repo:utils.bzl", "maybe")
 
+# build crate_universe
+load("@rules_rust//crate_universe:repositories.bzl", "crate_universe_dependencies")
+
 # go dependencies
 load("//:go_deps.bzl", "go_dependencies")
 
 # rust dependencies
 load("//3rdparty/crates:crates.bzl", "crate_repositories")
-
-# build crate_universe
-load("@rules_rust//crate_universe:repositories.bzl", "crate_universe_dependencies")
 
 # versions of dependencies
 load(":deps_versions.bzl", "versions")
@@ -40,10 +40,10 @@ def gazelle_rust_dependencies1():
     maybe(
         http_archive,
         name = "rules_proto",
-        sha256 = "e017528fd1c91c5a33f15493e3a398181a9e821a804eb7ff5acdd1d2d6c2b18d",
-        strip_prefix = "rules_proto-4.0.0-3.20.0",
+        sha256 = "303e86e722a520f6f326a50b41cfc16b98fe6d1955ce46642a5b7a67c11c0f5d",
+        strip_prefix = "rules_proto-6.0.0",
         urls = [
-            "https://github.com/bazelbuild/rules_proto/archive/refs/tags/4.0.0-3.20.0.tar.gz",
+            "https://github.com/bazelbuild/rules_proto/releases/download/6.0.0/rules_proto-6.0.0.tar.gz",
         ],
     )
 
