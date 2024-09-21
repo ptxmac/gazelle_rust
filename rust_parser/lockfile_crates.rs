@@ -61,7 +61,9 @@ pub fn get_bazel_lockfile_crates(lockfile_path: PathBuf) -> Result<Vec<Package>,
 }
 
 pub fn is_workspace_target(name: &str) -> bool {
-    name == "direct-cargo-bazel-deps"
+    //eprintln!("name: {}", name);
+    true
+    // name == "direct-cargo-bazel-deps"
 }
 
 /// Cargo lockfiles don't indicate whether a crate is a proc_macro, so we guess. If a crate depends
@@ -83,13 +85,16 @@ pub fn get_cargo_lockfile_crates(lockfile_path: PathBuf) -> Result<Vec<Package>,
         file => file?,
     };
 
+
     let mut is_proc_macro = HashMap::new();
     let mut deps = Vec::new();
 
     for pkg in lockfile.packages {
         if is_workspace_target(pkg.name.as_str()) {
+            //eprintln!("w package: {:#?}", pkg);
             deps.extend(pkg.dependencies);
         } else {
+            //eprintln!("norm package: {:#?}", pkg);
             is_proc_macro.insert(
                 pkg.name.as_str().to_string(),
                 pkg.dependencies
@@ -105,10 +110,11 @@ pub fn get_cargo_lockfile_crates(lockfile_path: PathBuf) -> Result<Vec<Package>,
         let mut package = Package::default();
         package.name = dep.name.as_str().to_string();
         package.crate_name = package.name.replace('-', "_");
-        package.proc_macro = is_proc_macro[dep.name.as_str()];
+        // package.proc_macro = is_proc_macro[dep.name.as_str()];
 
         crates.push(package);
     }
+    //eprintln!("creates: {:#?}", crates);
 
     Ok(crates)
 }

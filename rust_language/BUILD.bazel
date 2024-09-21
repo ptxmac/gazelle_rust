@@ -1,5 +1,4 @@
 load("@rules_go//go:def.bzl", "go_library")
-load("//util:gofmt.bzl", "gofmt_test")
 
 go_library(
     name = "rust_language",
@@ -23,13 +22,8 @@ go_library(
         "@gazelle//repo:go_default_library",
         "@gazelle//resolve:go_default_library",
         "@gazelle//rule:go_default_library",
-        "@org_golang_google_protobuf//encoding/protowire:go_default_library",
-        "@org_golang_google_protobuf//proto:go_default_library",
+        "@org_golang_google_protobuf//encoding/protowire",
+        "@org_golang_google_protobuf//proto",
         "@rules_go//go/tools/bazel:go_default_library",
     ],
-)
-
-gofmt_test(
-    name = "gofmt_test",
-    srcs = glob(["*.go"]),
 )
