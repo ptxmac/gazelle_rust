@@ -593,7 +593,6 @@ func (l *rustLang) generateCargoRule(c *config.Config, args *language.GenerateAr
 			newRule.SetAttr("srcs", srcs)
 		}
 	}
-	newRule.SetAttr("visibility", []string{"//visibility:public"})
 	newRule.SetAttr("compile_data", setToSortedVector(compile_data))
 
 	if targetName != crateName {
@@ -661,7 +660,6 @@ func (l *rustLang) generateBuildScript(c *config.Config, args *language.Generate
 
 	newRule := rule.NewRule("cargo_build_script", "build_script")
 	newRule.SetAttr("srcs", srcs)
-	newRule.SetAttr("visibility", []string{"//visibility:public"})
 	newRule.SetAttr("compile_data", setToSortedVector(compile_data))
 	newRule.SetAttr("crate_root", "build.rs")
 
