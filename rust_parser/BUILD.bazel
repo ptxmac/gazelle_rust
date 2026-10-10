@@ -21,6 +21,5 @@ rust_binary(
         "//proto:messages_rust_proto",
         "@gazelle_rust_crates//:cargo_toml",
         "@gazelle_rust_crates//:clap",
-        "@rules_rust_prost//private/3rdparty/crates:prost",
     ],
 )

@@ -5,8 +5,8 @@ use std::io::{Read, Write};
 use std::path::PathBuf;
 
 use clap::Parser;
-use prost::Message;
 
+use messages_proto::prost::Message;
 use messages_proto::{
     CargoCrateInfo, CargoTomlRequest, CargoTomlResponse, DependencyAlias, Hints,
     LockfileCratesRequest, LockfileCratesResponse, Request, RustImportsRequest,

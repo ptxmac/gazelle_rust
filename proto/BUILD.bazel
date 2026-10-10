@@ -1,12 +1,21 @@
 load("@rules_go//go:def.bzl", "go_library")
 load("@rules_go//proto:def.bzl", "go_proto_library")
 load("@rules_proto//proto:defs.bzl", "proto_library")
-load("@rules_rust_prost//:defs.bzl", "rust_prost_library")
+load("@rules_rust_prost//:defs.bzl", "rust_prost_library", "rust_prost_transform")
 
 proto_library(
     name = "messages_proto",
     srcs = ["messages.proto"],
+    data = [":reexport_prost"],
     visibility = ["//visibility:public"],
+)
+
+# The parser uses prost through this re-export, so it gets whichever prost
+# the registered rust_prost toolchain generated the messages with, not a
+# pinned one.
+rust_prost_transform(
+    name = "reexport_prost",
+    srcs = ["reexport_prost.rs"],
 )
 
 rust_prost_library(
